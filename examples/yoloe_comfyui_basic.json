@@ -1,0 +1,258 @@
+{
+  "last_node_id": 17,
+  "last_link_id": 15,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "LoadImage",
+      "pos": [
+        -321.0008239746094,
+        -38.5092658996582
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            10,
+            14
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.28",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example3.jpeg",
+        "image"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "D_YOLOENode_ModelLoader",
+      "pos": [
+        -317.9807434082031,
+        -465.337890625
+      ],
+      "size": [
+        312.0794677734375,
+        357.234619140625
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "YOLOEMODEL",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "hay86/ComfyUI_YOLOE",
+        "ver": "6e916ab2bca3da7cc304d98c6ff12167b768f757",
+        "Node name for S&R": "D_YOLOENode_ModelLoader"
+      },
+      "widgets_values": [
+        "yoloe-v8l-seg",
+        "girl, shorts, shoes"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "D_YOLOENode",
+      "pos": [
+        78.64802551269531,
+        -465.7937316894531
+      ],
+      "size": [
+        315,
+        126
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "YOLOEMODEL",
+          "link": 11
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "detections",
+          "type": "DETECTIONS",
+          "links": [
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "aux_id": "hay86/ComfyUI_YOLOE",
+        "ver": "6e916ab2bca3da7cc304d98c6ff12167b768f757",
+        "Node name for S&R": "D_YOLOENode"
+      },
+      "widgets_values": [
+        0.1,
+        0.7,
+        640
+      ]
+    },
+    {
+      "id": 14,
+      "type": "D_YOLOENode_Display",
+      "pos": [
+        84.41060638427734,
+        -267.462158203125
+      ],
+      "size": [
+        300.7721252441406,
+        57.04208755493164
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 14
+        },
+        {
+          "name": "detections",
+          "type": "DETECTIONS",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            15
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "aux_id": "hay86/ComfyUI_YOLOE",
+        "ver": "6e916ab2bca3da7cc304d98c6ff12167b768f757",
+        "Node name for S&R": "D_YOLOENode_Display"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 15,
+      "type": "PreviewImage",
+      "pos": [
+        82.12923431396484,
+        -128.24786376953125
+      ],
+      "size": [
+        320.8101806640625,
+        397.0333251953125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 15
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.28",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      10,
+      10,
+      0,
+      11,
+      1,
+      "IMAGE"
+    ],
+    [
+      11,
+      12,
+      0,
+      11,
+      0,
+      "YOLOEMODEL"
+    ],
+    [
+      13,
+      11,
+      0,
+      14,
+      1,
+      "DETECTIONS"
+    ],
+    [
+      14,
+      10,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      15,
+      14,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9229599817706905,
+      "offset": [
+        618.1729127634351,
+        562.6709429913957
+      ]
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

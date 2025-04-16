@@ -5,6 +5,7 @@ import torch.nn as nn
 from ultralytics.utils.torch_utils import smart_inference_mode
 import torch
 from ultralytics.utils import LOGGER
+import os
 
 class TextModel(nn.Module):
     def __init__(self):
@@ -48,7 +49,9 @@ class MobileCLIP(TextModel):
     def __init__(self, size, device):
         super().__init__()
         config = self.config_size_map[size]
-        self.model = mobileclip.create_model_and_transforms(f'mobileclip_{config}', pretrained=f'mobileclip_{size}.pt', device=device)[0]
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        root_dir = os.path.dirname(os.path.dirname(current_dir))
+        self.model = mobileclip.create_model_and_transforms(f'mobileclip_{config}', pretrained=os.path.join(root_dir, f'mobileclip_{size}.pt'), device=device)[0]
         self.tokenizer = mobileclip.get_tokenizer(f'mobileclip_{config}')
         self.to(device)
         self.device = device
